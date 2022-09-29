@@ -13,10 +13,6 @@
                         <span class="input-group-text">Name</span>
                         <input type="text" value={{old('name', $category->title)}} name="title" class="form-control">
                     </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">Surname</span>
-                        <input type="text" value={{old('surname', $category->surname)}} name="surname" class="form-control">
-                    </div>
                     @csrf
                     @method('put')
                     <button type="submit" class="btn btn-secondary mt-4">Save</button>

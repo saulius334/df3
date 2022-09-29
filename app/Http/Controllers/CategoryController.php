@@ -51,7 +51,9 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        return view('category.show', [
+            'category' => $category
+        ]);
     }
 
     /**
@@ -62,7 +64,9 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('category.edit', [
+            'category' => $category
+        ]);
     }
 
     /**
@@ -74,7 +78,10 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $category->update(
+            ['title' => $request->title]
+        );
+        return redirect()->route('c_index');
     }
 
     /**
@@ -85,6 +92,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return redirect()->route('c_index');
     }
 }
