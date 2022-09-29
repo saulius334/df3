@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController as catCon;
+use App\Http\Controllers\MovieController as movieCon;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,4 +31,14 @@ Route::prefix('category')->name('c_')->group(function () {
     Route::delete('/delete/{category}', [catCon::class, 'destroy'])->name('delete');
     Route::get('/edit/{category}', [catCon::class, 'edit'])->name('edit');
     Route::put('/edit/{category}', [catCon::class, 'update'])->name('update');
+});
+
+Route::prefix('movie')->name('m_')->group(function () {
+    Route::get('/', [movieCon::class, 'index'])->name('index');
+    Route::get('/create', [movieCon::class, 'create'])->name('create');
+    Route::post('/create', [movieCon::class, 'store'])->name('store');
+    Route::get('/show/{movie}', [movieCon::class, 'show'])->name('show');
+    Route::delete('/delete/{movie}', [movieCon::class, 'destroy'])->name('delete');
+    Route::get('/edit/{movie}', [movieCon::class, 'edit'])->name('edit');
+    Route::put('/edit/{movie}', [movieCon::class, 'update'])->name('update');
 });
