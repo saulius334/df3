@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="container --content">
     <div class="row justify-content-center">
@@ -7,32 +6,6 @@
             <div class="card">
                 <div class="card-header">
                     <h2>Categories</h2>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-5">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-6">
-                                                {{-- <button type="submit" class="btn btn-primary m-1">Sort</button> --}}
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-7">
-                                    <div class="container">
-                                        <div class="row">
-
-                                            {{-- <div class="col-4"> --}}
-                                                {{-- <button type="submit" class="btn btn-primary m-1">results in page</button> --}}
-                                                {{-- <a href="{{route('c_index')}}" class="btn btn-secondary m-1">Reset</a> --}}
-                                            {{-- </div> --}}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                 </div>
                 <div class="card-body">
                     <ul class="list-group">
@@ -40,7 +13,11 @@
                         <li class="list-group-item">
                             <div class="categories-list">
                                 <div class="content">
-                                    <h2>{{$category->title}}</h2>
+                                    <h2>{{$category->title}}
+                                    </h2>
+                                    <small>
+                                        [{{$category->hasMovies()->count()}}]
+                                    </small>
                                 </div>
                                 <div class="buttons">
                                     <a href="{{route('c_show', $category)}}" class="btn btn-info">Show</a>
