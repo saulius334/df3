@@ -10,4 +10,8 @@ class Category extends Model
     use HasFactory;
 
     protected $fillable = ['title'];
+
+    public function hasMovies() {
+        return $this->hasMany(Movie::class, 'category_id', 'id');
+    }
 }

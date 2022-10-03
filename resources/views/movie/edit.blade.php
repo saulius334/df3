@@ -10,22 +10,14 @@
                 <div class="card-body">
                     <form action="{{route('m_update', $movie)}}" method="post" enctype="multipart/form-data">
                     <div class="input-group mb-3">
-                        <span class="input-group-text">Maker</span>
-                        <input value="{{old('maker', $movie->maker)}}" type="text" name="maker" class="form-control">
+                        <span class="input-group-text">Title</span>
+                        <input value="{{old('title', $movie->title)}}" type="text" name="title" class="form-control">
                     </div>
                     <div class="input-group mb-3">
-                        <span class="input-group-text">Plate</span>
-                        <input value="{{old('plate', $movie->plate)}}" type="text" name="plate" class="form-control">
+                        <span class="input-group-text">Price</span>
+                        <input value="{{old('price', $movie->price)}}" type="text" name="price" class="form-control">
                     </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">Make year</span>
-                        <input value="{{old('make_year', $movie->make_year)}}" type="text" name="make_year" class="form-control">
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">Notices</span>
-                        <textarea name="mechanic_notices" class="form-control">{{old('mechanic_notices', $movie->mechanic_notices)}}</textarea>
-                    </div>
-                    @if($movie->photo)
+                    {{-- @if($movie->photo)
                         <div class="img-small mt-3">
                             <img src="{{$movie->photo}}">
                             <div class="form-check">
@@ -39,11 +31,11 @@
                         <div class="input-group mt-3">
                             <span class="input-group-text">Photo</span>
                             <input type="file" name="photo" class="form-control">
-                        </div>
-                    <select name="mechanic_id" class="form-select mt-3">
-                        <option value="0">Choose mechanic</option>
-                        @foreach ($mechanics as $value)
-                        <option value="{{$value->id}}" @if ($value->id == old($value->id, $movie->mechanic_id)) selected @endif>{{$value->name}} {{$value->surname}}</option>
+                        </div> --}}
+                    <select name="category_id" class="form-select mt-3">
+                        <option value="0">Choose Category</option>
+                        @foreach ($categories as $value)
+                        <option value="{{$value->id}}" @if ($value->id == old($value->id, $movie->category_id)) selected @endif>{{$value->title}}</option>
                         @endforeach
 
                       </select>

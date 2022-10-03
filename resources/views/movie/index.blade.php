@@ -54,7 +54,7 @@
                                     <h4><span>Price: </span>{{$movie->price}}</h4>
                                     <h5>
                                         <span>Category: </span>
-                                        <a href="{{route('c_show', $movie->getCategory->id)}}">
+                                        <a href="{{route('m_show', $movie->getCategory->id)}}">
                                             {{$movie->getCategory->title}}
                                         </a></h5>
                                     @if($movie->photo)
@@ -62,9 +62,9 @@
                                     @endif
                                 </div>
                                 <div class="buttons">
-                                    <a href="{{route('c_show', $movie)}}" class="btn btn-info">Show</a>
-                                    <a href="{{route('c_edit', $movie)}}" class="btn btn-success">Edit</a>
-                                    <form action="{{route('c_delete', $movie)}}" method="post">
+                                    <a href="{{route('m_show', $movie)}}" class="btn btn-info">Show</a>
+                                    <a href="{{route('m_edit', $movie)}}" class="btn btn-success">Edit</a>
+                                    <form action="{{route('m_delete', $movie)}}" method="post">
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="btn btn-danger">Delete</button>
