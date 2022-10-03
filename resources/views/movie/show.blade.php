@@ -10,9 +10,9 @@
                 </div>
                 <div class="card-body">
                     <div class="movie-show">
-                    <div class="line"><small>Plate:</small><h5>{{$movie->plate}}</h5></div>
-                    <div class="line"><small>movie:</small><h5>{{$movie->maker}} {{$movie->make_year}}</h5></div>
-                    <div class="line"><small>Mechanic:</small><h5>{{$movie->getMechanic->name}} {{$movie->getMechanic->surname}}</h5></div>
+                    <div class="line"><small>Title:</small><h5>{{$movie->title}}</h5></div>
+                    <div class="line"><small>Price:</small><h5>{{$movie->price}} {{$movie->make_year}}</h5></div>
+                    <div class="line"><small>Category:</small><h5>{{$movie->getCategory->title}}</h5></div>
                     @if($movie->photo)
                     <div class="img">
                         <img src="{{$movie->photo}}" alt="photo">
