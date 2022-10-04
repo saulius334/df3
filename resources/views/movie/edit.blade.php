@@ -17,6 +17,20 @@
                         <span class="input-group-text">Price</span>
                         <input value="{{old('price', $movie->price)}}" type="text" name="price" class="form-control">
                     </div>
+                    <div class="img--small mt-3">
+                         @forelse($movie->getPhotos as $photo)
+                    <div class="img">
+                        <input class="form-check-input" type="checkbox" value="1" id="{{$photo->id}}-del-photo" name="delete_photo[]">
+                        <label class="form-check-label" for="{{$photo->id}}-del-photo">
+                            Delete photo
+                        </label>
+                        <img src="{{$photo->url}}" alt="photo">
+                    </div>
+                    @empty
+                        <h3>No photos</h3>
+                    @endforelse
+                    </div>
+                   
                     {{-- @if($movie->photo)
                         <div class="img-small mt-3">
                             <img src="{{$movie->photo}}">

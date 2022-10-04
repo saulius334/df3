@@ -58,7 +58,7 @@
                                             {{$movie->getCategory->title}}
                                         </a></h5>
                                     @if($movie->getPhotos()->count())
-                                    <h5><a href="{{$movie->getPhotos->first()->url}}" target="_BLANK">Photos[{{$movie->getPhotos()->count()}}]</a></h5>
+                                    <h5><a href="{{$movie->lastImageUrl()}}" target="_BLANK">Photos[{{$movie->getPhotos()->count()}}]</a></h5>
                                     @endif
                                 </div>
                                 <div class="buttons">
