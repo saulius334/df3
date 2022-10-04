@@ -1,12 +1,9 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Movie;
-use App\Models\MovieImage;
 use App\Models\Category;
 use Illuminate\Http\Request;
-
 
 class MovieController extends Controller
 {
@@ -17,11 +14,10 @@ class MovieController extends Controller
      */
     public function index()
     {
-    return view('movie.index', [
+       return view('movie.index', [
         'movies' => Movie::orderBy('updated_at', 'desc')->get(),
        ]);
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -31,47 +27,24 @@ class MovieController extends Controller
     {
         return view('movie.create', [
             'categories' => Category::orderBy('updated_at', 'desc')->get(),
-
         ]);
     }
-
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request;  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-       
-            if ($request->file('photo')) {
-                $id = $movie->id;
-                $urls = [];
-                foreach($request->file('photo') as $photo) {
+        Movie::create([
+            'title' => $request->title,
+            'price' => $request->price,
+            'category_id' => $request->category_id
+        ])->addImages($request->file('photo'));
 
-                
-
-
-                $ext = $photo->getClientOriginalExtension();
-                $name = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
-                $file = $name. '-' . rand(100000, 999999). '.' . $ext;
-                
-                // $Image = Image::make($photo)->pixelate(12);
-                // $Image->save(public_path().'/images/'.$file);
-                $photo->move(public_path().'/images', $file);
-                }
-            }
-            $movie = Movie::create([
-                'url' => asset('/images/') . '/' . $file,
-                'movie_id' => $id
-                
-               ]);
-            MovieImage::
-
-
-       return redirect()->route('m_index');
+        return redirect()->route('m_index');
     }
-
     /**
      * Display the specified resource.
      *
@@ -81,10 +54,9 @@ class MovieController extends Controller
     public function show(Movie $movie)
     {
         return view('movie.show', [
-            'movie' => $movie
+            'movie' => $movie,
         ]);
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -96,15 +68,12 @@ class MovieController extends Controller
         return view('movie.edit', [
             'movie' => $movie,
             'categories' => Category::orderBy('updated_at', 'desc')->get(),
-    
         ]);
-        
     }
-
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request   $request
+     * @param  \Illuminate\Http\Request;  $request
      * @param  \App\Models\Movie  $movie
      * @return \Illuminate\Http\Response
      */
@@ -113,11 +82,10 @@ class MovieController extends Controller
         $movie->update([
             'title' => $request->title,
             'price' => $request->price,
-            'category_id' => $request->category_id,
+            'category_id' => $request->category_id
         ]);
         return redirect()->route('m_index');
     }
-
     /**
      * Remove the specified resource from storage.
      *

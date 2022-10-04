@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 @section('content')
 <div class="container --content">
     <div class="row justify-content-center">
@@ -14,10 +15,8 @@
                             <div class="categories-list">
                                 <div class="content">
                                     <h2>{{$category->title}}
+                                        <small>[{{$category->movies()->count()}}]</small>
                                     </h2>
-                                    <small>
-                                        [{{$category->hasMovies()->count()}}]
-                                    </small>
                                 </div>
                                 <div class="buttons">
                                     <a href="{{route('c_show', $category)}}" class="btn btn-info">Show</a>

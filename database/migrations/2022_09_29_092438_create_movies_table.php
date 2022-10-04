@@ -21,7 +21,6 @@ return new class extends Migration
             $table->unsignedBigInteger('rating_sum')->default(0);
             $table->unsignedBigInteger('rating_num')->default(0);
             $table->unsignedBigInteger('category_id');
-            $table->string('image', 200);
             $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
         });

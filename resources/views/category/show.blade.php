@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-12">
+        <div class="col-9">
             <div class="card">
                 <div class="card-header">
                     <h2>Category</h2>
@@ -13,12 +13,12 @@
                         <h5>{{$category->title}}</h5>
                     </div>
                     <ul class="list-group">
-                        @forelse($category->hasMovies as $movie)
+                        @forelse($category->movies as $movie)
                         <li class="list-group-item">
                             <div class="movies-list">
                                 <div class="content">
-                                    <h1><span>Title: </span>{{$movie->title}}</h1>
-                                    <h4><span>Price: </span>{{$movie->price}}</h4>
+                                    <h2><span>title: </span>{{$movie->title}}</h2>
+                                    <h4><span>price: </span>{{$movie->price}}</h4>
                                 </div>
                             </div>
                         </li>
@@ -30,7 +30,7 @@
                         <form action="{{route('c_delete_movies', $category)}}" method="post">
                             @csrf
                             @method('delete')
-                            <button type="submit" class="btn btn-danger">Delete all</button>
+                            <button type="submit" class="btn btn-danger">Delete all movies</button>
                         </form>
                     </div>
                 </div>
