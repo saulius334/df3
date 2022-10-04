@@ -10,10 +10,11 @@ import 'bootstrap';
  */
 
 import axios from 'axios';
+import Swiper from 'swiper';
 window.axios = axios;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
+const swiper = new Swiper(...)
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
