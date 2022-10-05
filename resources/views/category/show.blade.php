@@ -13,7 +13,7 @@
                         <h5>{{$category->title}}</h5>
                     </div>
                     <ul class="list-group">
-                        @forelse($category->movies as $movie)
+                        @forelse($category->hasMovies as $movie)
                         <li class="list-group-item">
                             <div class="movies-list">
                                 <div class="content">
