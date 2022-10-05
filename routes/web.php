@@ -16,14 +16,11 @@ use App\Http\Controllers\HomeController as homeCon;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Auth::routes();
 
-Route::get('/', [homeCon::class, 'homeList'])->name('home_list');
-Route::get('/home', [homeCon::class, 'index'])->name('home');
+Route::get('/', [homeCon::class, 'homeList'])->name('home')->middleware('gate:home');
 
 Route::prefix('category')->name('c_')->group(function () {
     Route::get('/', [catCon::class, 'index'])->name('index')->middleware('gate:user');

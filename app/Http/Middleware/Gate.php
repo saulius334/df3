@@ -21,9 +21,13 @@ class Gate
         // dd($role);
 
         $permissions = [
-            1 => ['user'],
-            10 => ['user', 'admin']
+            1 => ['user', 'home'],
+            10 => ['user', 'admin', 'home']
         ];
+
+        if ('home' == $role && !FacadesAuth::user()) {
+            return redirect('login');
+        }
 
         if (!in_array($role, $permissions[FacadesAuth::user()->role])) {
             abort(401);
