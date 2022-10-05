@@ -63,12 +63,14 @@
                                 </div>
                                 <div class="buttons">
                                     <a href="{{route('m_show', $movie)}}" class="btn btn-info">Show</a>
+                                    @if(Auth::user()->role >= 10)
                                     <a href="{{route('m_edit', $movie)}}" class="btn btn-success">Edit</a>
                                     <form action="{{route('m_delete', $movie)}}" method="post">
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="btn btn-danger">Delete</button>
                                     </form>
+                                    @endif
                                 </div>
                             </div>
                         </li>

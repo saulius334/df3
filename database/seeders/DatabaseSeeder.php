@@ -24,14 +24,16 @@ class DatabaseSeeder extends Seeder
             'email' => 'bebras@gmail.com',
             'password' => Hash::make('123'),
             'created_at' => $time,
-            'updated_at' => $time
+            'updated_at' => $time,
+            'role' => 1
         ]);
         DB::table('users')->insert([
             'name' => 'Briedis',
             'email' => 'briedis@gmail.com',
             'password' => Hash::make('123'),
             'created_at' => $time,
-            'updated_at' => $time
+            'updated_at' => $time,
+            'role' => 10
         ]);
 
         foreach(['Drama', 'Horror', 'Comedy', 'Boring', 'Action'] as $cat) {
