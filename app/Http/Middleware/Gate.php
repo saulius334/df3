@@ -25,7 +25,7 @@ class Gate
             10 => ['user', 'admin', 'home']
         ];
 
-        if ('home' == $role && !FacadesAuth::user()) {
+        if (!FacadesAuth::user()) {
             return redirect('login');
         }
 

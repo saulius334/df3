@@ -21,6 +21,7 @@ use App\Http\Controllers\HomeController as homeCon;
 Auth::routes();
 
 Route::get('/', [homeCon::class, 'homeList'])->name('home')->middleware('gate:home');
+Route::put('/rate/{movie}', [homeCon::class, 'rate'])->name('rate')->middleware('gate:user');
 
 Route::prefix('category')->name('c_')->group(function () {
     Route::get('/', [catCon::class, 'index'])->name('index')->middleware('gate:user');
