@@ -15,7 +15,7 @@
                             <div class="categories-list">
                                 <div class="content">
                                     <h2>{{$category->title}}
-                                        <small>[{{$category->movies()->count()}}]</small>
+                                        <small>[{{$category->hasMovies()->count()}}]</small>
                                     </h2>
                                 </div>
                                 <div class="buttons">
