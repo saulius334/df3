@@ -8,10 +8,40 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function homeList()
+    public function homeList(Request $request)
     {
+        //filter
+        if ($request->cat) {
+            $movies = Movie::where('category_id', $request->cat);
+        } else {
+            $movies = Movie::where('id', '>', 0);
+        }
+        // sort
+        if ($request->sort =='rate_asc') {
+            $movies->orderBy('rating', 'asc');
+        }
+        else if ($request->sort =='rate_desc') {
+            $movies->orderBy('rating', 'desc');
+        }
+        else if ($request->sort =='title_asc') {
+            $movies->orderBy('title', 'asc');
+        }
+        else if ($request->sort =='title_desc') {
+            $movies->orderBy('title', 'desc');
+        }
+        else if ($request->sort =='price_asc') {
+            $movies->orderBy('price', 'asc');
+        }
+        else if ($request->sort =='price_desc') {
+            $movies->orderBy('price', 'desc');
+        }
        return view('home.index', [
-        'movies' => Movie::orderBy('title', 'desc')->get(),
+        'movies' => $movies->get(),
+        'categories' => Category::orderBy('title',)->get(),
+        'cat' => $request->cat ?? '0',
+        'sort' => $request->sort ?? '0',
+
+        'sortSelect' => Movie::SORT_SELECT
        ]);
     }
     public function rate(Request $request, Movie $movie) {
