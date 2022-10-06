@@ -20,8 +20,6 @@ return new class extends Migration
             $table->decimal('rating', 4, 2)->nullable();
             $table->unsignedBigInteger('rating_sum')->default(0);
             $table->unsignedBigInteger('rating_num')->default(0);
-            $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
         });
     }
