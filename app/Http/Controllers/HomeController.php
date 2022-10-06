@@ -13,7 +13,10 @@ class HomeController extends Controller
         //filter
         if ($request->cat) {
             $movies = Movie::where('category_id', $request->cat);
-        } else {
+        } else if ($request->s) {
+            $movies = Movie::where('title', 'like', '%'.$request->s.'%');
+            }
+        else {
             $movies = Movie::where('id', '>', 0);
         }
         // sort
@@ -40,7 +43,7 @@ class HomeController extends Controller
         'categories' => Category::orderBy('title',)->get(),
         'cat' => $request->cat ?? '0',
         'sort' => $request->sort ?? '0',
-
+        's' => $request->s ?? '',
         'sortSelect' => Movie::SORT_SELECT
        ]);
     }
