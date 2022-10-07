@@ -19,6 +19,7 @@
                                                     <option value="{{$category->id}}" @if($cat==$category->id) selected @endif>{{$category->title}}</option>
                                                     @endforeach
                                                 </select>
+                                                hello
                                             </div>
                                             <div class="col-5">
                                                 <select name="sort" class="form-select mt-1">
