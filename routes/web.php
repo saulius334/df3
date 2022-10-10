@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController as comCon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MovieController as movieCon;
@@ -35,8 +36,8 @@ Route::prefix('movie')->name('m_')->group(function () {
 });
 
 Route::prefix('comment')->name('c_')->group(function () {
-    Route::get('/', [movieCon::class, 'index'])->name('index')->middleware('gate:user');
-    Route::delete('/delete/{comment}', [movieCon::class, 'create'])->name('delete')->middleware('gate:admin');
+    Route::get('/', [comCon::class, 'index'])->name('index')->middleware('gate:user');
+    Route::delete('/delete/{comment}', [comCon::class, 'destroy'])->name('delete')->middleware('gate:admin');
     // Route::post('/create', [movieCon::class, 'store'])->name('store')->middleware('gate:admin');
     // Route::get('/show/{movie}', [movieCon::class, 'show'])->name('show')->middleware('gate:user');
     // Route::delete('/delete/{movie}', [movieCon::class, 'destroy'])->name('delete')->middleware('gate:admin');

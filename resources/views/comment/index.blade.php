@@ -6,13 +6,13 @@
         <div class="col-9">
             <div class="card">
                 <div class="card-header">
-                    <h2>Categories</h2>
+                    <h2>Comments</h2>
                 </div>
                 <div class="card-body">
                     <ul class="list-group">
-                        @forelse($movies as $movies)
+                        @forelse($movies as $movie)
                         <li class="list-group-item">
-                            <div class="categories-list">
+                            <div>
                                 <div class="content">
                                     <h2>{{$movie->title}}
                                         <small>[{{$movie->getComments()->count()}}]</small>
@@ -36,24 +36,10 @@
                                     <li class="list-group-item">No comments</li>
                                     @endforelse
                                 </ul>
-
-
-                                <div class="buttons">
-                                    @if(Auth::user()->role >= 10)
-                                    <form action="{{route('c_delete', $category)}}" method="post">
-                                        @csrf
-                                        @method('delete')
-                                        <button type="submit" class="btn btn-danger">Delete</button>
-                                    </form>
-                                    @endif
-                                </div>
-
-
-
                             </div>
                         </li>
                         @empty
-                        <li class="list-group-item">No categories found</li>
+                        <li class="list-group-item">No comments found</li>
                         @endforelse
                     </ul>
                 </div>
