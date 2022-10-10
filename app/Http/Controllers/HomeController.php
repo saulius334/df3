@@ -46,7 +46,7 @@ class HomeController extends Controller
             $movies->orderBy('price', 'desc');
         }
        return view('home.index', [
-        'movies' => $movies->get(),
+        'movies' => $movies->paginate(5)->withQueryString(),
         'sort' => $request->sort ?? '0',
         's' => $request->s ?? '',
         'sortSelect' => Movie::SORT_SELECT

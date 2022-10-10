@@ -3,7 +3,7 @@
 @section('content')
 <div class="container --content">
     <div class="row justify-content-center">
-        <div class="col-9">
+        <div class="col-12">
             <div class="card">
                 <div class="card-header">
                     <h2>Comments</h2>
@@ -44,7 +44,7 @@
                     </ul>
                 </div>
                 <div class="me-3 mx-3">
-                    {{-- {{ $categories->links() }} --}}
+                    {{ $movies->links() }}
                 </div>
             </div>
         </div>
