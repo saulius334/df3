@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Movie;
-use App\Models\Category;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -11,9 +11,7 @@ class HomeController extends Controller
     public function homeList(Request $request)
     {
         //filter
-        if ($request->cat) {
-            $movies = Movie::where('category_id', $request->cat);
-        } else if ($request->s) {
+        if ($request->s) {
             $search = explode(' ', $request->s);
             if (count($search) == 1) {
                 $movies = Movie::where('title', 'like', '%'.$request->s.'%');
@@ -49,8 +47,6 @@ class HomeController extends Controller
         }
        return view('home.index', [
         'movies' => $movies->get(),
-        'categories' => Category::orderBy('title',)->get(),
-        'cat' => $request->cat ?? '0',
         'sort' => $request->sort ?? '0',
         's' => $request->s ?? '',
         'sortSelect' => Movie::SORT_SELECT
@@ -61,6 +57,14 @@ class HomeController extends Controller
         $movie->rating_num++;
         $movie->rating = $movie->rating_sum / $movie->rating_num;
         $movie->save();
+        return redirect()->back();
+    }
+
+    public function addComment(Request $request, Movie $movie) {
+        Comment::create([
+            'movie_id' => $movie->id,
+            'post' => $request->post
+        ]);
         return redirect()->back();
     }
 }
