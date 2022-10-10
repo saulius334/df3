@@ -25,9 +25,7 @@ class MovieController extends Controller
      */
     public function create()
     {
-        return view('movie.create', [
-            'categories' => Category::orderBy('updated_at', 'desc')->get(),
-        ]);
+        return view('movie.create');
     }
     /**
      * Store a newly created resource in storage.
@@ -39,8 +37,7 @@ class MovieController extends Controller
     {
         Movie::create([
             'title' => $request->title,
-            'price' => $request->price,
-            'category_id' => $request->category_id
+            'price' => $request->price
         ])->addImages($request->file('photo'));
 
         return redirect()->route('m_index');
@@ -66,9 +63,8 @@ class MovieController extends Controller
     public function edit(Movie $movie)
     {
         return view('movie.edit', [
-            'movie' => $movie,
-            'categories' => Category::orderBy('updated_at', 'desc')->get(),
-        ]);
+            'movie' => $movie
+            ]);
     }
     /**
      * Update the specified resource in storage.
@@ -82,8 +78,7 @@ class MovieController extends Controller
         $movie
         ->update([
             'title' => $request->title,
-            'price' => $request->price,
-            'category_id' => $request->category_id
+            'price' => $request->price
         ]);
         $movie
         ->removeImages($request->delete_photo)

@@ -33,13 +33,6 @@
                             <h2>No photos yet.</h2>
                             @endforelse
                         </div>
-
-                        <select name="category_id" class="form-select mt-3">
-                            <option value="0">Choose category</option>
-                            @foreach($categories as $category)
-                            <option value="{{$category->id}}" @if($category->id == old('category_id', $movie->category_id)) selected @endif>{{$category->title}}</option>
-                            @endforeach
-                        </select>
                         @csrf
                         @method('put')
                         <button type="submit" class="btn btn-secondary mt-4">Save</button>
