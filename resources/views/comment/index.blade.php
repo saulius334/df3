@@ -10,18 +10,36 @@
                 </div>
                 <div class="card-body">
                     <ul class="list-group">
-                        @forelse($categories as $category)
+                        @forelse($movies as $movies)
                         <li class="list-group-item">
                             <div class="categories-list">
                                 <div class="content">
-                                    <h2>{{$category->title}}
-                                        <small>[{{$category->hasMovies()->count()}}]</small>
+                                    <h2>{{$movie->title}}
+                                        <small>[{{$movie->getComments()->count()}}]</small>
                                     </h2>
                                 </div>
+                                <ul class="list-group">
+                                    @forelse($movie->getComments as $comment)
+                                    <li class="list-group-item">
+                                        <p>{{$comment->post}}</p>
+                                        <div class="buttons">
+                                            @if(Auth::user()->role >= 10)
+                                            <form action="{{route('c_delete', $comment)}}" method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </form>
+                                            @endif
+                                        </div>
+                                    </li>
+                                    @empty
+                                    <li class="list-group-item">No comments</li>
+                                    @endforelse
+                                </ul>
+
+
                                 <div class="buttons">
-                                    <a href="{{route('c_show', $category)}}" class="btn btn-info">Show</a>
                                     @if(Auth::user()->role >= 10)
-                                    <a href="{{route('c_edit', $category)}}" class="btn btn-success">Edit</a>
                                     <form action="{{route('c_delete', $category)}}" method="post">
                                         @csrf
                                         @method('delete')
@@ -29,6 +47,9 @@
                                     </form>
                                     @endif
                                 </div>
+
+
+
                             </div>
                         </li>
                         @empty

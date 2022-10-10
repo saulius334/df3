@@ -10,7 +10,7 @@ class Movie extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'price', 'category_id'];
+    protected $fillable = ['title', 'price'];
 
     const SORT_SELECT = [
         ["rate_asc", "Rating 1 - 9"],
@@ -21,10 +21,6 @@ class Movie extends Model
         ["price_desc", "Price highest"]
     ];
 
-    public function getCategory()
-    {
-        return $this->belongsTo(Category::class, 'category_id', 'id');
-    }
     public function getPhotos()
     {
         return $this->hasMany(MovieImage::class, 'movie_id', 'id');
@@ -71,5 +67,8 @@ class Movie extends Model
             MovieImage::destroy($photos);
         }
         return $this;
+    }
+    public function getComments() {
+        return $this->hasMany(Comment::class, 'movie_id', 'id');
     }
 }

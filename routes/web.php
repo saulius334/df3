@@ -33,3 +33,13 @@ Route::prefix('movie')->name('m_')->group(function () {
     Route::get('/edit/{movie}', [movieCon::class, 'edit'])->name('edit')->middleware('gate:admin');
     Route::put('/edit/{movie}', [movieCon::class, 'update'])->name('update')->middleware('gate:admin');
 });
+
+Route::prefix('comment')->name('c_')->group(function () {
+    Route::get('/', [movieCon::class, 'index'])->name('index')->middleware('gate:user');
+    Route::delete('/delete/{comment}', [movieCon::class, 'create'])->name('delete')->middleware('gate:admin');
+    // Route::post('/create', [movieCon::class, 'store'])->name('store')->middleware('gate:admin');
+    // Route::get('/show/{movie}', [movieCon::class, 'show'])->name('show')->middleware('gate:user');
+    // Route::delete('/delete/{movie}', [movieCon::class, 'destroy'])->name('delete')->middleware('gate:admin');
+    // Route::get('/edit/{movie}', [movieCon::class, 'edit'])->name('edit')->middleware('gate:admin');
+    // Route::put('/edit/{movie}', [movieCon::class, 'update'])->name('update')->middleware('gate:admin');
+});
