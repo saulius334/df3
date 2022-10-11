@@ -57,7 +57,7 @@ class HomeController extends Controller
         $movie->rating_num++;
         $movie->rating = $movie->rating_sum / $movie->rating_num;
         $movie->save();
-        return redirect()->back();
+        return redirect()->back()->with('ok', 'Thank you for rating!');
     }
 
     public function addComment(Request $request, Movie $movie) {

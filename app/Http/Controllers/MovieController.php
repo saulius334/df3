@@ -35,12 +35,22 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'title' => 'required|min:3|max:10',
+            'price' => 'required|numeric|min:1|max:100',
+            'photo.*' => 'sometimes|required|mimes:jpg|max:3000'
+        ],
+        [
+            'title.required' => 'No title',
+            'price.required' => 'No price',
+            'price.required' => 'No price'
+        ]);
         Movie::create([
             'title' => $request->title,
             'price' => $request->price
         ])->addImages($request->file('photo'));
 
-        return redirect()->route('m_index');
+        return redirect()->route('m_index')->with('ok', 'Success');
     }
     /**
      * Display the specified resource.
@@ -75,6 +85,16 @@ class MovieController extends Controller
      */
     public function update(Request $request, Movie $movie)
     {
+        $validated = $request->validate([
+            'title' => 'required|min:3|max:10',
+            'price' => 'required|numeric|min:1|max:100',
+            'photo.*' => 'sometimes|required|mimes:jpg|max:3000'
+        ],
+        [
+            'title.required' => 'No title',
+            'price.required' => 'No price',
+            'price.required' => 'No price'
+        ]);
         $movie
         ->update([
             'title' => $request->title,
@@ -84,7 +104,7 @@ class MovieController extends Controller
         ->removeImages($request->delete_photo)
         ->addImages($request->file('photo'));
 
-        return redirect()->route('m_index');
+        return redirect()->route('m_index')->with('ok', 'Success');
     }
     /**
      * Remove the specified resource from storage.
@@ -98,7 +118,8 @@ class MovieController extends Controller
             $delIds = $movie->getPhotos()->pluck('id')->all();
             $movie->removeImages($delIds);
         }
+        $title = $movie->title;
         $movie->delete();
-        return redirect()->route('m_index');
+        return redirect()->route('m_index')->with('ok', '"' . $title . '"' . ' has been deleted');
     }
 }
