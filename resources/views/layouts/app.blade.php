@@ -125,6 +125,18 @@
             </div>
     
 @endif
+@if (Session::has('not'))
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-6 m-4">
+            <div class="alert alert-danger">
+                {{Session::get('not')}}
+            </div>
+        </div>
+    </div>
+</div>
+
+@endif
             @yield('content')
         </main>
     </div>
