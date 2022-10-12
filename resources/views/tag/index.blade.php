@@ -15,7 +15,7 @@
                             <div class="categories-list">
                                 <div class="content">
                                     <h2>{{$tag->title}}
-                                        <small>[{{$tag->hasMovies()->count()}}]</small>
+                                        <small>[{{$tag->getPivot()->count()}}]</small>
                                     </h2>
                                 </div>
                                 <div class="buttons">
@@ -32,7 +32,7 @@
                             </div>
                         </li>
                         @empty
-                        <li class="list-group-item">No categories found</li>
+                        <li class="list-group-item">No tags found</li>
                         @endforelse
                     </ul>
                 </div>

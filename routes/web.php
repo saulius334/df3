@@ -36,7 +36,7 @@ Route::prefix('movie')->name('m_')->group(function () {
     Route::put('/edit/{movie}', [movieCon::class, 'update'])->name('update')->middleware('gate:admin');
 });
 
-Route::prefix('tag')->name('m_')->group(function () {
+Route::prefix('tag')->name('t_')->group(function () {
     Route::get('/', [tagCon::class, 'index'])->name('index')->middleware('gate:user');
     Route::get('/create', [tagCon::class, 'create'])->name('create')->middleware('gate:admin');
     Route::post('/create', [tagCon::class, 'store'])->name('store')->middleware('gate:admin');
