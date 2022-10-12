@@ -10,7 +10,6 @@ use Carbon\Carbon;
 use Faker\Factory as F;
 
 class DatabaseSeeder extends Seeder
-
 {
     /**
      * Seed the application's database.
@@ -20,7 +19,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $time = Carbon::now();
-        $faker = F::create('lt_LT');
+        $faker = F::create();
         DB::table('users')->insert([
             'name' => 'Bebras',
             'email' => 'bebras@gmail.com',
@@ -53,13 +52,32 @@ class DatabaseSeeder extends Seeder
                 'updated_at' => $time
             ]);
         }
-        foreach(range(0,21) as $_) {
+
+        foreach([
+            'Nice',
+            'Very Nice',
+            '18+',
+            'Very Blue',
+            'Animalistic',
+            'Perfect'
+        ] as $tag) {
+            DB::table('tags')->insert([
+                'title' => $tag,
+                'created_at' => $time->addSeconds(1),
+                'updated_at' => $time
+            ]);
+        }
+
+        foreach(range(1, 22) as $_) {
             DB::table('comments')->insert([
-                'post' => $faker->paragraph(rand(0,9)),
+                'post' => $faker->paragraph(rand(1, 10)),
                 'movie_id' => rand(1, 6),
                 'created_at' => $time->addSeconds(1),
                 'updated_at' => $time
             ]);
         }
+
+
+
     }
 }

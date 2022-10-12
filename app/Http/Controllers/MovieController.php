@@ -2,7 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Movie;
-use App\Models\Category;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class MovieController extends Controller
@@ -25,7 +25,9 @@ class MovieController extends Controller
      */
     public function create()
     {
-        return view('movie.create');
+        return view('movie.create', [
+            'tags' => Tag::orderBy('title')->get()
+        ]);
     }
     /**
      * Store a newly created resource in storage.
@@ -48,7 +50,8 @@ class MovieController extends Controller
         Movie::create([
             'title' => $request->title,
             'price' => $request->price
-        ])->addImages($request->file('photo'));
+        ])->addImages($request->file('photo'))
+        ->addTags($request->tag);
 
         return redirect()->route('m_index')->with('ok', 'Success');
     }
@@ -73,7 +76,9 @@ class MovieController extends Controller
     public function edit(Movie $movie)
     {
         return view('movie.edit', [
-            'movie' => $movie
+            'movie' => $movie,
+            'tags' => Tag::orderBy('title')->get(),
+            'checkedTags' => $movie->getPivot->pluck('tag_id')->all(),
             ]);
     }
     /**

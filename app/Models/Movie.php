@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use App\Models\MovieTag;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -25,6 +26,15 @@ class Movie extends Model
     {
         return $this->hasMany(MovieImage::class, 'movie_id', 'id');
     }
+    public function getPivot() {
+        return $this->hasMany(MovieTag::class, 'movie_id', 'id');
+    }
+
+    public function getTags()
+    {
+        return $this->belongsToMany(Tag::class, 'movie_tags', 'movie_id', 'tag_id');
+    }
+
     public function lastImageUrl()
     {
         return $this->getPhotos()->orderBy('id', 'desc')->first()->url;
@@ -70,5 +80,22 @@ class Movie extends Model
     }
     public function getComments() {
         return $this->hasMany(Comment::class, 'movie_id', 'id');
+    }
+    public function addTags(?array $tags): self
+    {
+        if ($tags) {
+            $movieTag = [];
+            $time = Carbon::now();
+            foreach ($tags as $tag) {
+                $movieTag[] = [
+                    'movie_id' => $this->id,
+                    'tag_id' => $tag,
+                    'created_at' => $time,
+                    'updated_at' => $time,
+                ];
+            }
+            MovieTag::insert($movieTag);
+        }
+        return $this;
     }
 }

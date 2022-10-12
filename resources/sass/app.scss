@@ -201,3 +201,23 @@ textarea.form-control {
         height: 400px;
     }
 }
+.all-tags {
+    margin: 0 10px;
+    border: 1px dotted skyblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    a {
+        text-decoration: none;
+        color: black;
+        padding: 0 10px;
+    }
+    span {
+        padding: 5px 10px 5px 0;
+        color: orange;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

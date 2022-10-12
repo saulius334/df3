@@ -18,13 +18,27 @@
                             <span class="input-group-text">Price</span>
                             <input type="text" name="price" class="form-control" value="{{old('price')}}">
                         </div>
-                        <div data-clone class="input-group mt-3">
+                        <div class="input-group mt-3">
                             <span class="input-group-text">Photo</span>
                             <input type="file" name="photo[]" multiple class="form-control">
                         </div>
+                        <div class="tags-cloud">
+                            @forelse($tags as $tag)
+                            <div class="form-check">
+                                <input class="form-check-input" name="tag[]" type="checkbox" value="{{$tag->id}}" id="_{{$tag->id}}">
+                                <label class="form-check-label" for="_{{$tag->id}}">
+                                    {{$tag->title}}
+                                </label>
+                            </div>
+                            @empty
+                            <h3>No Tags Available</h3>
+                            @endforelse
+                        </div>
+
                         @csrf
                         <button type="submit" class="btn btn-secondary mt-4">Create</button>
                     </form>
+
                 </div>
             </div>
         </div>

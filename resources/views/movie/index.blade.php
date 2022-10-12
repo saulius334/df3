@@ -19,6 +19,14 @@
                                     <h5><a href="{{$movie->lastImageUrl()}}" target="_BLANK">Photos[{{$movie->getPhotos()->count()}}]</a></h5>
                                     @endif
                                 </div>
+                                @if($movie->getTags()->count())
+                                <div class="all-tags">
+                                    @foreach($movie->getTags as $tag)
+                                    <a href="{{route('t_show',$tag)}}">#<span>{{$tag->title}}</span></a>
+                                    @endforeach
+                                </div>
+                                @endif
+
                                 <div class="buttons">
                                     <a href="{{route('m_show', $movie)}}" class="btn btn-info">Show</a>
                                     @if(Auth::user()->role >= 10)
