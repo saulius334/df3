@@ -107,7 +107,9 @@ class MovieController extends Controller
         ]);
         $movie
         ->removeImages($request->delete_photo)
-        ->addImages($request->file('photo'));
+        ->addImages($request->file('photo'))
+        ->removeTags($request->tag)
+        ->addTags($request->tag);
 
         return redirect()->route('m_index')->with('ok', 'Success');
     }
